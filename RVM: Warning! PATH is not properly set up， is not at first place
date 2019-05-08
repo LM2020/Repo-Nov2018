@@ -1,0 +1,29 @@
+Ubuntu 18.04 VMWare
+Command : $ rvm list
+Error :   $ Warning! PATH is not properly set up, '/Users/kaityhallman/.rvm/gems/ruby-2.2.1/bin' is not at first place,
+            usually this is caused by shell initialization files - check them for 'PATH=...' entries,
+            it might also help to re-add RVM to your dotfiles: 'rvm get stable --auto-dotfiles',
+            to fix temporarily in this shell session run: 'rvm use ruby-2.2.1'.
+Actions : $ which ruby  # => /home/tools-aoeur/.rvm/rubies/ruby-2.4.5/bin/ruby
+          $ which gem   # => /home/tools-aoeur/.rvm/rubies/ruby-2.4.5/bin/gem
+          $ less ~/.bashrc  
+            # => # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+                 export PATH="$PATH:$HOME/.rvm/bin"
+                 export PATH="$HOME/.rbenv/bin:$PATH"
+                 eval "$(rbenv init -)"
+                 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+
+Cause : Conflict between rbenv and rvm 
+Fix : - $ sudo apt remove rbenv 
+      - Comment out (or delete) last lines in ~/.bashrc related to rbenv like following
+        # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+          export PATH="$PATH:$HOME/.rvm/bin"
+          #export PATH="$HOME/.rbenv/bin:$PATH"
+          #eval "$(rbenv init -)"
+          #export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
+        
+Test : $ rvm list # => =* ruby-2.4.5 [ x86_64 ]
+                        # => - current
+                        # =* - current && default
+                        #  * - default
+
