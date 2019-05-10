@@ -1,0 +1,12 @@
+Ubuntu 18.04 VMWare
+
+Wrong :  Each time open a new shell rvm progrem is not available untill running command : "source /usr/local/rvm/scripts/rvm"
+
+Actions : $ rvm info #=> no rvm command available
+
+Cause : bash is not set for rvm 
+Fix : - under certain user (regular user or root user)
+      - $ gedit ~/.bashrc  ( as root user ) 
+      - give this two lines to the bashrc file : source /usr/local/rvm/scripts/rvm
+                                                 export PATH="$PATH:$HOME/.rvm/bin" 
+      - close the shell and reopen a new one, rvm is always available for that user
